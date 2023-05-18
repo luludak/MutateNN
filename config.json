@@ -1,0 +1,684 @@
+{
+    "note": "All Models use input/output as the base format, but since on some cases there is transposition of some dims, we set the initial input and we infer the actual run input on run phase.",
+    "preprocessing_enabled": true,
+    "debug_enabled": false,
+    "backend": "tvm",
+    "runs_no": 1,
+    "conv_analysis_enabled": false,
+    "dl_conv_analysis_enabled": false,
+    "image_count_threshold": 0,
+    "enable_mutations": true,
+    "models": [
+        {
+            "name": "MobileNetV2",
+            "skip_analysis": false,
+            "build": false,
+            "execute": false,
+            "evaluate": true,
+            "load": "local",
+            "url": "https://github.com/onnx/models/raw/main/vision/classification/mobilenet/model/mobilenetv2-7.onnx",
+            "alias": "mobilenetv2-7.onnx",
+            "type": "remote",
+            "category": "classification",
+            "input_name": "data",
+            "output_name": "output",
+            "input_name_url": "input",
+            "layers": {
+                "image_dimension": [
+                    224,
+                    224
+                ],
+                "input": [
+                    1,
+                    3,
+                    224,
+                    224
+                ],
+                "output": [
+                    1,
+                    1000
+                ]
+            },
+            "paths": {
+                "models_out_relative": "/generated/MobileNet-2-7/models/simple_run/",
+                "exec_out_relative": "/generated/MobileNet-2-7/simple_run/local/",
+                "evaluation_out_relative": "/generated/MobileNet-2-7/simple_run/"
+            }
+        },
+        {
+            "name": "ResNet152V2",
+            "skip_analysis": true,
+            "build": false,
+            "execute": false,
+            "evaluate": true,
+            "url": "https://github.com/onnx/models/raw/main/vision/classification/resnet/model/resnet152-v2-7.onnx?raw=true",
+            "alias": "resnet-152-v2-7.onnx",
+            "dll_alias": "ResNet152",
+            "type": "remote",
+            "category": "classification",
+            "input_name": "data",
+            "dl_input_name": "inputs:0",
+            "layers": {
+                "image_dimension": [
+                    224,
+                    224
+                ],
+                "input": [
+                    1,
+                    3,
+                    224,
+                    224
+                ],
+                "output": [
+                    1,
+                    1000
+                ]
+            },
+            "paths": {
+                "models_out_relative": "/generated/ResNet152-2-7/models/simple_run/",
+                "exec_out_relative": "/generated/ResNet152-2-7/muts/simple_run/local",
+                "evaluation_out_relative": "/generated/ResNet152-2-7/simple_run/"
+            }
+        },
+        {
+            "name": "DenseNet121",
+            "skip_analysis": true,
+            "build": false,
+            "execute": false,
+            "evaluate": true,
+            "url": "https://github.com/onnx/models/raw/main/vision/classification/densenet-121/model/densenet-9.onnx?raw=true",
+            "alias": "densenet-9.onnx",
+            "type": "remote",
+            "category": "classification",
+            "input_name": "inputs:0",
+            "output_name": "output",
+            "input_name_url": "data_0",
+            "dl_input_name": "inputs:0",
+            "layers": {
+                "image_dimension": [
+                    224,
+                    224
+                ],
+                "input": [
+                    1,
+                    3,
+                    224,
+                    224
+                ],
+                "output": [
+                    1,
+                    1000
+                ]
+            },
+            "paths": {
+                "models_out_relative": "/generated/DenseNet121-9/simple_run/",
+                "exec_out_relative": "/generated/DenseNet121-9/v/local/",
+                "evaluation_out_relative": "/generated/DenseNet121-9/simple_run/"
+            }
+        },
+        {
+            "name": "InceptionV2",
+            "skip_analysis": true,
+            "build": false,
+            "execute": false,
+            "evaluate": true,
+            "url": "https://github.com/onnx/models/raw/main/vision/classification/inception_and_googlenet/inception_v2/model/inception-v2-9.onnx?raw=true",
+            "alias": "inceptionv2-9.onnx",
+            "type": "remote",
+            "category": "classification",
+            "input_name": "data_0",
+            "dl_input_name": "inputs:0",
+            "layers": {
+                "image_dimension": [
+                    224,
+                    224
+                ],
+                "input": [
+                    1,
+                    3,
+                    224,
+                    224
+                ],
+                "output": [
+                    1,
+                    1000
+                ]
+            },
+            "paths": {
+                "models_out_relative": "/generated/InceptionV2-9/models/simple_run/",
+                "exec_out_relative": "/generated/InceptionV2-9/simple_run/local/",
+                "evaluation_out_relative": "/generated/InceptionV2-9//simple_run/"
+            }
+        },
+        {
+            "name": "GoogleNet9",
+            "skip_analysis": true,
+            "build": false,
+            "execute": false,
+            "evaluate": true,
+            "url": "https://github.com/onnx/models/raw/main/vision/classification/inception_and_googlenet/googlenet/model/googlenet-9.onnx?raw=true",
+            "alias": "googlenet-9.onnx",
+            "type": "remote",
+            "category": "classification",
+            "input_name": "data_0",
+            "dl_input_name": "inputs:0",
+            "layers": {
+                "image_dimension": [
+                    224,
+                    224
+                ],
+                "input": [
+                    1,
+                    3,
+                    224,
+                    224
+                ],
+                "output": [
+                    1,
+                    1000
+                ]
+            },
+            "paths": {
+                "models_out_relative": "/generated/GoogleNet9/models/simple_run/",
+                "exec_out_relative": "/generated/GoogleNet9/simple_run/local/",
+                "evaluation_out_relative": "/generated/GoogleNet9/simple_run/"
+            }
+        },
+        {
+            "name": "ShuffleNetV2",
+            "skip_analysis": true,
+            "build": false,
+            "execute": false,
+            "evaluate": true,
+            "url": "https://github.com/onnx/models/raw/main/vision/classification/shufflenet/model/shufflenet-v2-12.onnx?raw=true",
+            "alias": "shufflenet-2-12.onnx",
+            "type": "remote",
+            "category": "classification",
+            "input_name": "input",
+            "dl_input_name": "inputs:0",
+            "layers": {
+                "image_dimension": [
+                    224,
+                    224
+                ],
+                "input": [
+                    1,
+                    3,
+                    224,
+                    224
+                ],
+                "output": [
+                    1,
+                    1000
+                ]
+            },
+            "dll_libraries": [
+                {
+                    "library": "noop",
+                    "load": "library",
+                    "model": ""
+                }
+            ],
+            "paths": {
+                "models_out_relative": "/generated/ShuffleNet-2-12/simple_run/",
+                "exec_out_relative": "/generated/ShuffleNet-2-12/simple_run/local/",
+                "evaluation_out_relative": "/generated/ShuffleNet-2-12/simple_run/"
+            }
+        },
+        {
+            "name": "EfficientNet",
+            "skip_analysis": true,
+            "build": false,
+            "execute": false,
+            "url": "https://github.com/onnx/models/blob/master/vision/classification/alexnet/model/bvlcalexnet-3.onnx?raw=true",
+            "alias": "bvlcalexnet-3.onnx",
+            "type": "remote",
+            "category": "classification",
+            "input_name": "data_0",
+            "dl_input_name": "inputs:0",
+            "layers": {
+                "image_dimension": [
+                    224,
+                    224
+                ],
+                "input": [
+                    1,
+                    3,
+                    224,
+                    224
+                ],
+                "output": [
+                    1,
+                    1000
+                ]
+            },
+            "paths": {
+                "models_out_relative": "/generated/EfficientNetLite-4-11/models/simple_run/",
+                "exec_out_relative": "/generated/EfficientNetLite-4-11/simple_run/local/",
+                "evaluation_out_relative": "/generated/EfficientNetLite-4-11/simple_run/"
+            }
+        },
+        {
+            "name": "AlexNet",
+            "skip_analysis": true,
+            "build": false,
+            "execute": false,
+            "evaluate": true,
+            "url": "https://github.com/onnx/models/blob/master/vision/classification/alexnet/model/bvlcalexnet-3.onnx?raw=true",
+            "alias": "bvlcalexnet-3.onnx",
+            "type": "remote",
+            "category": "classification",
+            "input_name": "data_0",
+            "dl_input_name": "inputs:0",
+            "layers": {
+                "image_dimension": [
+                    224,
+                    224
+                ],
+                "input": [
+                    1,
+                    3,
+                    224,
+                    224
+                ],
+                "output": [
+                    1,
+                    1000
+                ]
+            },
+            "paths": {
+                "models_out_relative": "/generated/AlexNet-12/simple_run/",
+                "exec_out_relative": "/generated/AlexNet-12/simple_run/local/",
+                "evaluation_out_relative": "/generated/AlexNet-12/simple_run/"
+            }
+        }
+    ],
+    "devices": {
+        "id": 0,
+        "selected": "default",
+        "default": {
+            "host_type": "local_no_rpc",
+            "target": "opencl",
+            "target_framework": "opencl",
+            "host": "llvm",
+            "address": "127.0.0.1",
+            "port": 5000
+        },
+        "default_cuda": {
+            "host_type": "local_no_rpc",
+            "target": "cuda",
+            "target_framework": "cuda",
+            "host": "llvm -mtriple=aarch64-linux-gnu -mattr=+neon",
+            "address": "127.0.0.1",
+            "port": 5000
+        },
+        "server1": {
+            "host_type": "remote",
+            "target": "opencl",
+            "target_framework": "opencl",
+            "host": "llvm",
+            "address": "",
+            "port": 5000
+        },
+        "server2": {
+            "host_type": "remote",
+            "target": "opencl",
+            "target_framework": "opencl",
+            "host": "llvm",
+            "address": "",
+            "port": 5000
+        },
+        "hikey": {
+            "host_type": "remote",
+            "target": "opencl",
+            "target_framework": "opencl",
+            "host": "llvm -mtriple=aarch64-linux-gnu -mattr=+neon",
+            "address": "",
+            "port": 5000
+        },
+        "xavier": {
+            "target": "cuda",
+            "target_framework": "cuda",
+            "host": "llvm -mtriple=aarch64-linux-gnu -mattr=+neon",
+            "host_type": "remote",
+            "address": "",
+            "port": 5000
+        },
+        "local_cpu": {
+            "host_type": "local",
+            "target_framework": "cpu",
+            "target": "llvm -mtriple=x86_64-linux-gnu -mcpu=core-avx2",
+            "host": "llvm -mtriple=x86_64-linux-gnu -mcpu=core-avx2",
+            "address": "127.0.0.1",
+            "port": 5000
+        }
+    },
+    "selected_dataset": 0,
+    "datasets": [
+        {
+            "title": "Small Dataset",
+            "type": "local",
+            "dataset_path_relative": "/images/very-small"
+        },
+        {
+            "title": "Large Dataset",
+            "type": "local",
+            "dataset_path_relative": "/images/ImageNet-2017-5k"
+        }
+    ],
+    "opt_alias": "",
+    "required_pass": null,
+    "note2": "The system allows optimization setting, as well as filtering of specific TVM optimizations.",
+    "disabled_pass": [
+        "OpFusion",
+        "FoldConstant",
+        "FoldScaleAxis",
+        "AlterOpLayout",
+        "CanonicalizeOps",
+        "CanonicalizeCast",
+        "EliminateCommonSubexpr",
+        "CombineParallelConv2D",
+        "CombineParallelBatchMatmul",
+        "CombineParallelDense",
+        "FastMath"
+    ],
+    "disabled_pass2": [
+        "SimplifyInference",
+        "OpFusion",
+        "FoldConstant",
+        "FoldScaleAxis",
+        "AlterOpLayout",
+        "CanonicalizeOps",
+        "CanonicalizeCast",
+        "EliminateCommonSubexpr",
+        "CombineParallelConv2D",
+        "CombineParallelDense",
+        "CombineParallelBatchMatmul",
+        "FastMath"
+    ],
+    "opt_level": 2,
+    "quantize": false,
+    "mutations_parameterized": {
+        "note": "Add different positions per model.",
+        "positions": {
+            "MobileNetV2": {
+                "tir": [
+                    1,
+                    5
+                ],
+                "relay": [
+                    1,
+                    5
+                ]
+            }
+        },
+        "relay": [
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "transpose",
+                "title": "transpose_conv2d_dense_0_before",
+                "order": "before",
+                "functions": [
+                    "nn.conv2d",
+                    "nn.dense"
+                ],
+                "arg": 0
+            }
+        ],
+        "tir": [
+            {
+                "type": "change_threshold",
+                "skip": false,
+                "title": "change_threshold_ite_LT_r_a_0_5",
+                "original": "model",
+                "mutation": "change_threshold",
+                "stmt_type": "tir.IfThenElse",
+                "op": {
+                    "condition": "tvm.tir.expr.LT",
+                    "part": "right",
+                    "action": "add",
+                    "threshold_change": 0.5
+                }
+            }
+        ]
+    },
+    "mutations": {
+        "relay":[{
+            "type": "apply_tensor_operation",
+            "skip": false,
+            "operation": "transpose",
+            "title": "transpose_conv2d_0_before",
+            "order": "before",
+            "functions": [
+                "nn.conv2d"
+            ],
+            "arg": 0
+        }],
+        "tir":[{
+            "type": "change_ifstmt",
+            "skip": false,
+            "title": "ifstmt_LT_to_LE",
+            "stmt_type": "tir.IfThenElse",
+            "original": "tvm.tir.expr.LT",
+            "mutation": "tvm.tir.expr.LE"
+        }]
+    },
+    "mutations_all": {
+        "relay": [
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "transpose",
+                "title": "transpose_conv2d_0_before",
+                "order": "before",
+                "functions": [
+                    "nn.conv2d"
+                ],
+                "arg": 0
+            },
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "transpose",
+                "title": "transpose_dense_0_before",
+                "order": "before",
+                "functions": [
+                    "nn.dense"
+                ],
+                "arg": 0
+            },
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "transpose",
+                "title": "transpose_conv2d_dense_0_before",
+                "order": "before",
+                "functions": [
+                    "nn.conv2d",
+                    "nn.dense"
+                ],
+                "arg": 0
+            },
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "transpose",
+                "title": "transpose_conv2d_dense_1_before",
+                "order": "before",
+                "functions": [
+                    "nn.conv2d",
+                    "nn.dense"
+                ],
+                "arg": 1
+            },
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "transpose",
+                "title": "transpose_batch_norm_0_before",
+                "order": "before",
+                "functions": [
+                    "nn.batch_norm"
+                ],
+                "arg": 0
+            },
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "exp",
+                "title": "exp_conv2d_dense_0_before",
+                "order": "before",
+                "functions": [
+                    "nn.conv2d",
+                    "nn.dense"
+                ],
+                "arg": 0
+            },
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "exp",
+                "title": "exp_conv2d_dense_0_after",
+                "order": "after",
+                "functions": [
+                    "nn.conv2d",
+                    "nn.dense"
+                ],
+                "arg": 0
+            },
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "exp",
+                "title": "exp_batch_norm_0_before",
+                "order": "before",
+                "functions": [
+                    "nn.batch_norm"
+                ],
+                "arg": 0
+            },
+            {
+                "type": "apply_tensor_operation",
+                "skip": false,
+                "operation": "round",
+                "title": "round_batch_norm_0_before",
+                "order": "before",
+                "functions": [
+                    "nn.batch_norm"
+                ],
+                "arg": 0
+            },
+            {
+                "title": "replace_func_add_to_subtract",
+                "skip": false,
+                "type": "replace_func",
+                "original_func_name": "add",
+                "mutated_func_name": "subtract"
+            },
+            {
+                "title": "replace_func_relu_to_sigmoid",
+                "skip": false,
+                "type": "replace_func",
+                "original_func_name": "nn.relu",
+                "mutated_func_name": "sigmoid"
+            }
+        ],
+        "tir": [
+            {
+                "type": "change_type",
+                "skip": false,
+                "title": "float32_to_float16",
+                "original": "float32",
+                "mutation": "float16",
+                "stmt_type": "tir.Store"
+            },
+            {
+                "type": "change_type",
+                "skip": false,
+                "title": "float32_to_int32",
+                "original": "float32",
+                "mutation": "int32",
+                "stmt_type": "tir.Store"
+            },
+            {
+                "type": "change_type",
+                "skip": false,
+                "title": "float32_to_int16",
+                "original": "float32",
+                "mutation": "int16",
+                "stmt_type": "tir.Store"
+            },
+            {
+                "type": "change_type",
+                "skip": false,
+                "title": "float32_to_int8",
+                "original": "float32",
+                "mutation": "int8",
+                "stmt_type": "tir.Store"
+            },
+            {
+                "type": "change_store_value",
+                "skip": false,
+                "title": "subtract_from_store_value",
+                "operator": "-",
+                "modifier_value": "0.00000001",
+                "stmt_type": "tir.Store"
+            },
+            {
+                "type": "change_store_value",
+                "skip": false,
+                "title": "multiply_store_value",
+                "operator": "*",
+                "modifier_value": "1.00000001",
+                "stmt_type": "tir.Store"
+            },
+            {
+                "type": "change_threshold",
+                "skip": false,
+                "title": "change_threshold_ite_LT_r_a_0_5",
+                "original": "model",
+                "mutation": "change_threshold",
+                "stmt_type": "tir.IfThenElse",
+                "op": {
+                    "condition": "tvm.tir.expr.LT",
+                    "part": "right",
+                    "action": "add",
+                    "threshold_change": 0.5
+                }
+            },
+            {
+                "type": "change_ifstmt",
+                "skip": false,
+                "title": "ifstmt_LT_to_LE",
+                "stmt_type": "tir.IfThenElse",
+                "original": "tvm.tir.expr.LT",
+                "mutation": "tvm.tir.expr.LE"
+            },
+            {
+                "type": "change_ifstmt",
+                "skip": false,
+                "title": "ifstmt_LT_to_GT",
+                "stmt_type": "tir.IfThenElse",
+                "original": "tvm.tir.expr.LT",
+                "mutation": "tvm.tir.expr.GT"
+            },
+            {
+                "type": "change_ifstmt",
+                "skip": false,
+                "title": "ifstmt_GT_to_LT",
+                "stmt_type": "tir.IfThenElse",
+                "original": "tvm.tir.expr.GT",
+                "mutation": "tvm.tir.expr.LT"
+            },
+            {
+                "type": "change_ifstmt",
+                "title": "ifstmt_GT_to_GE",
+                "skip": false,
+                "stmt_type": "tir.IfThenElse",
+                "original": "tvm.tir.expr.GT",
+                "mutation": "tvm.tir.expr.GE"
+            }
+        ]
+    }
+}
