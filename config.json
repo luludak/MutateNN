@@ -12,8 +12,8 @@
         {
             "name": "MobileNetV2",
             "skip_analysis": false,
-            "build": false,
-            "execute": false,
+            "build": true,
+            "execute": true,
             "evaluate": true,
             "load": "local",
             "url": "https://github.com/onnx/models/raw/main/vision/classification/mobilenet/model/mobilenetv2-7.onnx",
@@ -53,7 +53,6 @@
             "evaluate": true,
             "url": "https://github.com/onnx/models/raw/main/vision/classification/resnet/model/resnet152-v2-7.onnx?raw=true",
             "alias": "resnet-152-v2-7.onnx",
-            "dll_alias": "ResNet152",
             "type": "remote",
             "category": "classification",
             "input_name": "data",
