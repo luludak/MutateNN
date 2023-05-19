@@ -239,6 +239,3 @@ for loop_count in range(config["runs_no"]):
 
                 eg_mts.generate_devices_comparison(model_base, replace_evaluated_suffix=True)                
                 eg_mts.distinguish_device_discrepancies(model_base)
-
-
-
