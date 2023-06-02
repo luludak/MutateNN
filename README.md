@@ -1,7 +1,6 @@
 # MutateNN
 
-MutateNN is a comprehensive suite for compiling, optimizing, executing and analyzing pretrained DNNs under different computational environment settings. In total, the framework supports:
-
+MutateNN is a comprehensive suite for mutation testing and analysis of DNNs utilized for image recognition tasks and deployed on a variety hardware acceleration devices. In total, the tool supports:
 - Downloading and building Deep Neural Networks.
 - Generating mutants from a variety of settings for testing purposes, given many parameterization capabilities.
 - Generating device code for execution on different hardware acceleration devices.
