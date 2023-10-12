@@ -26,7 +26,7 @@ In addition, the system requires a number of pip packages. You can find them in 
 For instructions of how to install TVM, please refer to the [TVM related guide for developers](https://tvm.apache.org/docs/install/from_source.html#developers-get-source-from-github).
 We built the system using the TVM, v0.13.0.
 
-Follow the installation from source instructions, and based on the experiments you want to run, enable the respective flags in the `<tvm_folder>/build/config.cmake`. For our experiments, we followed different settings per-device, but  consider enabling the `USE_LLVM` and `USE_OPENCL` or `USE_CUDA` flags, depending on your configuration.
+Follow the installation from source instructions, and based on the experiments you want to run, enable the respective flags in the `<tvm_folder>/build/config.cmake`. For our experiments, we followed different settings per-device, but consider enabling the `USE_LLVM` and `USE_OPENCL` or `USE_CUDA` flags, depending on your configuration.
 
 3. Install necessary packages by executing the command:
 `pip install -r requirements.txt` 
@@ -53,7 +53,7 @@ https://tvm.apache.org/docs/tutorial/cross_compilation_and_rpc.html).
 
 ## Example
 In order to verify your installation and be able to run the framework with your own configuration, we have setup the configuration to build the system utilizing 7 models under test: `MobileNetV2, DenseNet121, ResNet152, AlexNet, ShuffleNet, EfficientNetLite and InceptionV2`.
-You can download, run and evaluate the models accordingly. All models are obtained from the slim official repository, are pre-trained against `ImageNet` and perform classification tasks, for 100 [labels](https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a).
+You can download, run and evaluate the models accordingly. All models are obtained from the slim official repository, are pre-trained against `ImageNet` and perform classification tasks, for 1000 [labels](https://gist.github.com/yrevar/942d3a0ac09ec9e5eb3a).
 
 We also provide a small test dataset, consisting of 5 public domain images (Sample Dataset Images obtained from [unsplash](https://unsplash.com/images/stock/public-domain). No copyright infingement intended.) To demonstrate device comparison, we have generated 3 simulations on different devices for `MobileNetV2`, which can be found on `/generated/MobileNetV2/simple_run`.
  You can instruct `MutateNN` to build, run and evaluate the existing dataset against these device outputs, by setting `build, execute` and `evaluate` to `true` in `MobileNetV2` entry on `config.json`.
