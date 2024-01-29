@@ -160,6 +160,7 @@ class EvaluationGenerator:
         for base in devices:
 
             libraries = [l for l in listdir(join(base_folder, base)) if isdir(join(base_folder, base, l))]
+
             for library in libraries:
 
                 if(not library in comparisons):
@@ -168,16 +169,10 @@ class EvaluationGenerator:
                 base_lib_path = join(base_folder, base, library)
                 if not base_lib_path.endswith("mutations"):
                     base_lib_path = join(base_lib_path, "mutations")
+
                 if (not exists(base_lib_path)):
                     print("Base Path does not exist. Skipping.....")
                     continue
-
-                folder_base = [db for db in listdir() if isdir(join(base_lib_path, db))]
-
-                if(len(folder_base) == 0):
-                    continue
-
-                last_base = folder_base[-1]
 
                 for evaluated in devices:
 
@@ -193,16 +188,7 @@ class EvaluationGenerator:
                         print("Evaluated mutations folder does not exist. Skipping.....")
                         continue
 
-                    folder_eval = [db for db in listdir(evaluated_lib_path) if isdir(join(evaluated_lib_path, db))]
-                    
-                    if(len(folder_eval) == 0):
-                        print("Evaluated folder is empty. Skipping.....")
-                        continue
-                    
-                    last_eval = folder_eval[-1] 
-
-
-                    comparison_stats = self.get_basic_evaluation(join(base_lib_path, last_base), join(evaluated_lib_path, "mutations", last_eval), base_folder, False)
+                    comparison_stats = self.get_basic_evaluation(base_lib_path, evaluated_lib_path, base_folder, False)
                     
                     if(comparison_stats is None):
                         continue
@@ -407,13 +393,13 @@ class EvaluationGenerator:
             "orig_total_exec_time": orig_total_exec_time,
             "average_exec_time": total_exec_time / div_total_images_no,
             "average_orig_exec_time": orig_total_exec_time / div_total_images_no,
-            "images_dissimilar": images_dissimilar
-            #"exec_time_percentages": exec_time_percentages,
-            #"diff_labels": total_diff_label_info
-            # "oneway_exec_time": {
-            #     "statistic": t_test_result[0] if not math.isnan(t_test_result[0]) else "NaN",
-            #     "p-value": t_test_result[1] if not math.isnan(t_test_result[1]) else "NaN"
-            # }
+            "images_dissimilar": images_dissimilar,
+            "exec_time_percentages": exec_time_percentages,
+            "diff_labels": total_diff_label_info,
+            "oneway_exec_time": {
+                "statistic": t_test_result[0] if not math.isnan(t_test_result[0]) else "NaN",
+                "p-value": t_test_result[1] if not math.isnan(t_test_result[1]) else "NaN"
+            }
         }
 
         if (verbose_time_data):
