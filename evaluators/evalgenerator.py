@@ -36,8 +36,9 @@ class EvaluationGenerator:
         if evaluation_folders == None or len(evaluation_folders) == 0:
             return
 
-        evaluation_folders_sorted = sorted(evaluation_folders)
-        evaluation_folders = evaluation_folders_sorted[-10:] if (len(evaluation_folders_sorted) >= 10) else evaluation_folders_sorted
+        evaluation_folders = sorted(evaluation_folders)
+        
+        # evaluation_folders = evaluation_folders_sorted[-10:] if (len(evaluation_folders_sorted) >= 10) else evaluation_folders_sorted
         comparisons = []
         times = {}
         total_images_dissimilar = {}
@@ -51,8 +52,10 @@ class EvaluationGenerator:
 
                 if (base == evaluated):
                     continue
-
-                comparison_stats = self.get_basic_evaluation(join(base_folder, base), join(base_folder, evaluated), base_folder, False)
+                
+                comparison_stats = self.get_basic_evaluation(join(base_folder, base, "mutations"), join(base_folder, evaluated, "mutations"), base_folder, False)
+                # print(evaluated)
+                # print(comparison_stats)
                 if(comparison_stats is None):
                     continue
 
@@ -87,6 +90,10 @@ class EvaluationGenerator:
             "comparisons": comparisons,
             "total_images_dissimilar": total_images_dissimilar
         }
+        
+        with open(join(base_folder, "same_folder.json"), 'w') as outfile:
+            print(json.dumps(full_object, indent=2, sort_keys=True), file=outfile)
+            outfile.close()
 
         return full_object
 
@@ -95,43 +102,43 @@ class EvaluationGenerator:
         new_obj = {}
         with open(join(base_folder, "device_evaluation.json")) as eval_file:
 
-                eval_dict = json.load(eval_file)
+            eval_dict = json.load(eval_file)
 
-                for mutation in eval_dict.keys():
+            for mutation in eval_dict.keys():
 
-                    mutation_data = eval_dict[mutation]
-                    new_data = []
+                mutation_data = eval_dict[mutation]
+                new_data = []
 
-                    if (mutation_data == []):
-                        new_data.append({
-                            "type": "full_crash"
-                        })
+                if (mutation_data == []):
+                    new_data.append({
+                        "type": "full_crash"
+                    })
+                    continue
+
+                for comparison in mutation_data:
+                    
+                    comparison_data = comparison["comparison"] if "comparison" in comparison else {}
+                    if (comparison_data == {}):
                         continue
 
-                    for comparison in mutation_data:
-                        
-                        comparison_data = comparison["comparison"] if "comparison" in comparison else {}
-                        if (comparison_data == {}):
-                            continue
-
-                        if(int(comparison_data["total_no_of_images"]) > self.image_count_threshold and float(comparison_data["percentage_dissimilar"]) > 0):
-                            new_data.append({
-                                "base": comparison["base"],
-                                "evaluated": comparison["evaluated"],
-                                "percentage_dissimilar": comparison_data["percentage_dissimilar"],
-                                "type": "discrepancy"
-                            })
-                        
-                        elif (int(comparison_data["total_no_of_images"] <= self.image_count_threshold)):
-                            new_data.append({
-                                "base": comparison["base"],
-                                "evaluated": comparison["evaluated"],
-                                "no_of_images": comparison_data["total_no_of_images"],
-                                "type": "crash"
-                            })
+                    if(int(comparison_data["total_no_of_images"]) > self.image_count_threshold and float(comparison_data["percentage_dissimilar"]) > 0):
+                        new_data.append({
+                            "base": comparison["base"],
+                            "evaluated": comparison["evaluated"],
+                            "percentage_dissimilar": comparison_data["percentage_dissimilar"],
+                            "type": "discrepancy"
+                        })
+                    
+                    elif (int(comparison_data["total_no_of_images"] <= self.image_count_threshold)):
+                        new_data.append({
+                            "base": comparison["base"],
+                            "evaluated": comparison["evaluated"],
+                            "no_of_images": comparison_data["total_no_of_images"],
+                            "type": "crash"
+                        })
 
 
-                    new_obj[mutation] = new_data
+                new_obj[mutation] = new_data
 
         with open(join(base_folder, "device_discrepancies.json"), 'w') as outfile:
             print(json.dumps(new_obj, indent=2, sort_keys=True), file=outfile)
@@ -159,11 +166,13 @@ class EvaluationGenerator:
                     comparisons[library] = []
 
                 base_lib_path = join(base_folder, base, library)
-                if (not exists(base_lib_path) or not exists(join(base_lib_path, "mutations"))):
+                if not base_lib_path.endswith("mutations"):
+                    base_lib_path = join(base_lib_path, "mutations")
+                if (not exists(base_lib_path)):
                     print("Base Path does not exist. Skipping.....")
                     continue
 
-                folder_base = [db for db in listdir(join(base_lib_path, "mutations")) if isdir(join(base_lib_path, "mutations", db))]
+                folder_base = [db for db in listdir() if isdir(join(base_lib_path, db))]
 
                 if(len(folder_base) == 0):
                     continue
@@ -174,14 +183,17 @@ class EvaluationGenerator:
 
                     evaluated_lib_path = join(base_folder, evaluated, library)
 
+                    if not evaluated_lib_path.endswith("mutations"):
+                        evaluated_lib_path = join(evaluated_lib_path, "mutations")
+
                     if (base == evaluated):
                         continue
 
-                    elif (not isdir(join(evaluated_lib_path, "mutations"))):
+                    elif (not isdir(evaluated_lib_path)):
                         print("Evaluated mutations folder does not exist. Skipping.....")
                         continue
 
-                    folder_eval = [db for db in listdir(join(evaluated_lib_path, "mutations")) if isdir(join(evaluated_lib_path, "mutations", db))]
+                    folder_eval = [db for db in listdir(evaluated_lib_path) if isdir(join(evaluated_lib_path, db))]
                     
                     if(len(folder_eval) == 0):
                         print("Evaluated folder is empty. Skipping.....")
@@ -190,7 +202,7 @@ class EvaluationGenerator:
                     last_eval = folder_eval[-1] 
 
 
-                    comparison_stats = self.get_basic_evaluation(join(base_lib_path, "mutations", last_base), join(evaluated_lib_path, "mutations", last_eval), base_folder, False)
+                    comparison_stats = self.get_basic_evaluation(join(base_lib_path, last_base), join(evaluated_lib_path, "mutations", last_eval), base_folder, False)
                     
                     if(comparison_stats is None):
                         continue
@@ -242,11 +254,24 @@ class EvaluationGenerator:
 
     def get_basic_evaluation(self, folder1_path, folder2_path, output_path_file, include_individual_analysis=True, write_to_file=False, dissimilar_images_max_no=10, max_no_of_diff_labels=0, verbose_time_data=False):
 
-        original_model_path = folder1_path
-        mutation_model_path = folder2_path
+        if(not os.path.exists(folder1_path) or not os.path.exists(folder2_path)):
+            print ("Original path does not exist. Skipping.")
+            return
+        folder1_ts_folder_name = [fo for fo in listdir(folder1_path) if not isfile(join(folder1_path, fo)) and "ts_" in fo]
+        if (len(folder1_ts_folder_name) == 0):
+            print ("Source TS path invalid. Skipping...")
+            return        
+        folder1_ts_folder_name = folder1_ts_folder_name[0]
 
-        mut_no = len(fnmatch.filter(os.listdir(mutation_model_path), '*.txt')) 
-        orig_no = len(fnmatch.filter(os.listdir(original_model_path), '*.txt'))
+        folder2_ts_folder_name = [fo for fo in listdir(folder2_path) if not isfile(join(folder2_path, fo)) and "ts_" in fo]
+        if (len(folder2_ts_folder_name) == 0):
+            print ("Target TS path invalid. Skipping...")
+            return
+        
+        folder2_ts_folder_name = folder2_ts_folder_name[0]
+
+        original_model_path = join(folder1_path, folder1_ts_folder_name)
+        mutation_model_path = join(folder2_path, folder2_ts_folder_name)
 
         # Size matching checks to avoid useless computations
         # on crashed models.
@@ -257,10 +282,13 @@ class EvaluationGenerator:
             print("Warning: mutation path " + mutation_model_path + " does not exist. Skipping evaluation.....")
             return
 
+        mut_no = len(fnmatch.filter(os.listdir(mutation_model_path), '*.txt')) 
+        orig_no = len(fnmatch.filter(os.listdir(original_model_path), '*.txt'))
 
-        elif(abs(mut_no - orig_no) >= self.difference_tolerance):
+        if(abs(mut_no - orig_no) >= self.difference_tolerance):
             print("Warning: " + mutation_model_path + " contains different number of files than base folder. Skipping evaluation.....")
             return
+            
 
         evaluation_data_obj = {}
 
@@ -379,13 +407,13 @@ class EvaluationGenerator:
             "orig_total_exec_time": orig_total_exec_time,
             "average_exec_time": total_exec_time / div_total_images_no,
             "average_orig_exec_time": orig_total_exec_time / div_total_images_no,
-            "images_dissimilar": images_dissimilar,
-            "exec_time_percentages": exec_time_percentages,
-            "diff_labels": total_diff_label_info,
-            "oneway_exec_time": {
-                "statistic": t_test_result[0] if not math.isnan(t_test_result[0]) else "NaN",
-                "p-value": t_test_result[1] if not math.isnan(t_test_result[1]) else "NaN"
-            }
+            "images_dissimilar": images_dissimilar
+            #"exec_time_percentages": exec_time_percentages,
+            #"diff_labels": total_diff_label_info
+            # "oneway_exec_time": {
+            #     "statistic": t_test_result[0] if not math.isnan(t_test_result[0]) else "NaN",
+            #     "p-value": t_test_result[1] if not math.isnan(t_test_result[1]) else "NaN"
+            # }
         }
 
         if (verbose_time_data):
@@ -402,7 +430,7 @@ class EvaluationGenerator:
         return evaluation_data_obj
 
 
-    def __count_problematic_occurences(self, original_path, samples_paths):
+    def _count_problematic_occurences(self, original_path, samples_paths):
 
         problematic_count = 0
         for sample_path in samples_paths:
