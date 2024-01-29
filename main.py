@@ -237,5 +237,8 @@ for loop_count in range(config["runs_no"]):
 
             for device_folder in device_folders:
 
+                # Compare across ground truth.
+                eg_mts.get_same_folder_comparison(join(model_base, device_folder), "model_original")
+                # Compare across devices.
                 eg_mts.generate_devices_comparison(model_base, replace_evaluated_suffix=True)                
                 eg_mts.distinguish_device_discrepancies(model_base)
