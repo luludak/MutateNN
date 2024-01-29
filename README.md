@@ -18,7 +18,7 @@ We also use `Python v3.x.x` (tested with `3.6.x`-`3.10.x`) and `Pip` as the pack
 
 In addition, the system requires a number of pip packages. You can find them in the ./requirements.txt file
 
-## Instructions:
+## Instructions
 
 1. Install Python and Pip on your system.
 - Python comes with linux distros usually, but this is not always the case for Pip. You can install it by running "sudo apt install python3-pip"
@@ -77,7 +77,7 @@ In total, the framework will generate the models compiled on TVM, utilizing the 
 You can also try your own model, given you provide the right files and settings. Configuration provides exactly the details requested for a model to be loaded from a backend, compiled using a specific optimization and GPU backend and be run for inference, respectfully.
 
 
-#### Execution/Inference:
+#### Execution/Inference
 Your system will then execute, generating a folder with experiments. The structure followed is:
 Build: `<script_folder>/<models_out_relative>//<model_variant>_<opt_setting>.tar`
 Execution: `<script_folder>/<exec_out_relative>/mutations/ts_<epoch_time_of_run>/<predictions>.txt`
@@ -88,7 +88,7 @@ In addition, you will find an execution_log.txt file in the aforementioned folde
 
 Console will indicate the status of the running model and update accordingly.
 
-#### Analysis:
+#### Analysis
 Once execution is complete, analysis will be executed. This will be done in 3 ways:
 - Comparing results per-device (if provided), in JSON files.
 - Separate csv and json files, containing metadata related to the execution.
@@ -101,5 +101,8 @@ The system will then generate the following files:
 The system performs analysis in an intelligent manner - it performs folder exploration to determine discrepancies and if it identifies a crashed execution bundle, or a case where the network has performed with heavy degradation (e.g., producing many similar results for different inputs), then it terminates.
 
 
-###### Errors:
+###### Errors
 In case of an error, the suite will generate a `<script_folder>/error_log/<model>/ts_<epoch_time_of_problematic_run>/error_log.txt` file containing all related info.
+
+## Demonstration
+You can watch a tool demonstration on [YouTube](https://www.youtube.com/watch?v=j7Ffd5y_i3g).
