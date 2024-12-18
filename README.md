@@ -101,8 +101,8 @@ The system will then generate the following files:
 The system performs analysis in an intelligent manner - it performs folder exploration to determine discrepancies and if it identifies a crashed execution bundle, or a case where the network has performed with heavy degradation (e.g., producing many similar results for different inputs), then it terminates.
 
 
-###### Errors
+#### Errors
 In case of an error, the suite will generate a `<script_folder>/error_log/<model>/ts_<epoch_time_of_problematic_run>/error_log.txt` file containing all related info.
 
-## Demonstration
-You can watch a tool demonstration on [YouTube](https://www.youtube.com/watch?v=j7Ffd5y_i3g).
+<!--## Demonstration
+You can watch a tool demonstration on [YouTube](https://www.youtube.com/watch?v=j7Ffd5y_i3g).-->
