@@ -23,8 +23,8 @@ In addition, the system requires a number of pip packages. You can find them in 
 1. Install Python and Pip on your system.
 - Python comes with linux distros usually, but this is not always the case for Pip. You can install it by running "sudo apt install python3-pip"
 2. Download and install TVM:
-For instructions of how to install TVM, please refer to the [TVM related guide for developers](https://tvm.apache.org/docs/install/from_source.html#developers-get-source-from-github).
-We built the system using the TVM, v0.13.0.
+For instructions of how to install TVM, please refer to the [TVM Installation Guide](https://tvm.apache.org/docs/install/index.html), or check [TVM related guide for developers](https://tvm.apache.org/docs/install/from_source.html#developers-get-source-from-github).
+We built the system using the TVM, v0.13.0. Newer versions are untested at the moment.
 
 Follow the installation from source instructions, and based on the experiments you want to run, enable the respective flags in the `<tvm_folder>/build/config.cmake`. For our experiments, we followed different settings per-device, but consider enabling the `USE_LLVM` and `USE_OPENCL` or `USE_CUDA` flags, depending on your configuration.
 
