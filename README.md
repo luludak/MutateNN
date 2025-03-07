@@ -1,5 +1,7 @@
 # MutateNN
 
+This is the tool of the paper that was accepted and will appear in IEEE ICST Mutation 2025. You can access the paper preprint [here](https://arxiv.org/abs/2306.01697).
+
 MutateNN is a comprehensive suite for mutation testing and analysis of DNNs utilized for image recognition tasks and deployed on a variety hardware acceleration devices. In total, the tool supports:
 - Downloading and building Deep Neural Networks.
 - Generating mutants from a variety of settings for testing purposes, given many parameterization capabilities.
