@@ -108,3 +108,7 @@ In case of an error, the suite will generate a `<script_folder>/error_log/<model
 
 <!--## Demonstration
 You can watch a tool demonstration on [YouTube](https://www.youtube.com/watch?v=j7Ffd5y_i3g).-->
+
+#### Notes
+Any sample dataset images provided in the repository are sourced from the internet, and their copyright(s) belong to their owner(s). The only reason of provision is purely for non-commercial, demonstration purposes of DiTOX (to showcase how it works), with respect to the copyright(s) of their owner(s) and no intention to infringe them.
+
